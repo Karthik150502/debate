@@ -12,7 +12,7 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
-import { Input } from '@/components/ui/input';
+import InfoCell from '@/components/infoCell';
 
 export default function Page() {
 
@@ -41,20 +41,19 @@ export default function Page() {
         <div className='w-full h-full flex items-center justify-start flex-col gap-5'>
             <Card className='w-full'>
                 <CardHeader>
-                    <CardTitle>Profile</CardTitle>
                     {/* <CardDescription>Card Description</CardDescription> */}
                     {/* <CardAction>Card Action</CardAction> */}
                 </CardHeader>
                 <CardContent>
                     <div className='w-full grid not-lg:grid-cols-1 lg:grid-cols-2 gap-6'>
-                        <div className='w-full flex items-center justify-between gap-2'>
-                            <span className='whitespace-nowrap text-xs'>Full Name</span>
-                            <Input disabled value={`${user?.firstName} ${user?.lastName}`} />
-                        </div>
-                        <div className='w-full flex items-center justify-between gap-2'>
-                            <span className='whitespace-nowrap text-xs'>Email</span>
-                            <Input disabled value={user?.email} />
-                        </div>
+                        <InfoCell
+                            label={"Full Name"}
+                            value={user ? `${user.firstName} ${user.lastName}` : null}
+                        />
+                        <InfoCell
+                            label={"Email"}
+                            value={user?.email}
+                        />
                     </div>
                 </CardContent>
                 <CardFooter>
