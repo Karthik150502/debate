@@ -41,7 +41,6 @@ export default function Page() {
         <div className='w-full h-full flex items-center justify-start flex-col gap-5'>
             <Card className='w-full'>
                 <CardHeader>
-                    <CardTitle>User Profile</CardTitle>
                     {/* <CardDescription>Card Description</CardDescription> */}
                     {/* <CardAction>Card Action</CardAction> */}
                 </CardHeader>
