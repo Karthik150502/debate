@@ -1,11 +1,66 @@
 "use client";
 
-import React from 'react'
+import { getSession } from '@/actions/getSession';
+import { UserProfile } from '@/utils/supabase/types';
+import React, { useEffect, useState } from 'react';
+import {
+    Card,
+    CardAction,
+    CardContent,
+    CardDescription,
+    CardFooter,
+    CardHeader,
+    CardTitle,
+} from "@/components/ui/card"
+import { Input } from '@/components/ui/input';
 
 export default function Page() {
 
+    const [user, setUser] = useState<UserProfile | null>(null);
+
+    useEffect(() => {
+        getSession().then(({ session }) => {
+            console.log({
+                session
+            })
+            if (session) {
+                setUser(() => {
+                    return {
+                        id: session.user.id,
+                        email: session.user.email,
+                        firstName: session.user.user_metadata.firstName,
+                        lastName: session.user.user_metadata.lastName,
+                        emailVerified: session.user.user_metadata.email_verified,
+                    }
+                })
+            }
+        })
+    }, [])
+
     return (
-        <div className='flex items-center justify-center flex-col gap-5'>
+        <div className='w-full h-full flex items-center justify-start flex-col gap-5'>
+            <Card className='w-full'>
+                <CardHeader>
+                    <CardTitle>Profile</CardTitle>
+                    {/* <CardDescription>Card Description</CardDescription> */}
+                    {/* <CardAction>Card Action</CardAction> */}
+                </CardHeader>
+                <CardContent>
+                    <div className='w-full grid not-lg:grid-cols-1 lg:grid-cols-2 gap-6'>
+                        <div className='w-full flex items-center justify-between gap-2'>
+                            <span className='whitespace-nowrap text-xs'>Full Name</span>
+                            <Input disabled value={`${user?.firstName} ${user?.lastName}`} />
+                        </div>
+                        <div className='w-full flex items-center justify-between gap-2'>
+                            <span className='whitespace-nowrap text-xs'>Email</span>
+                            <Input disabled value={user?.email} />
+                        </div>
+                    </div>
+                </CardContent>
+                <CardFooter>
+                    {/* <p>Card Footer</p> */}
+                </CardFooter>
+            </Card>
         </div>
     )
 }
