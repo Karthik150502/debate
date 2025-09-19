@@ -43,6 +43,7 @@ export default function Page() {
                 <CardHeader>
                     {/* <CardDescription>Card Description</CardDescription> */}
                     {/* <CardAction>Card Action</CardAction> */}
+                    <CardTitle>User Details</CardTitle>
                 </CardHeader>
                 <CardContent>
                     <div className='w-full grid not-lg:grid-cols-1 lg:grid-cols-2 gap-6'>
