@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 import { montserrat400 } from "@/fonts/custom/montserrat";
 import "./globals.css";
 import { ThemeProvider } from "@/providers/ThemProvider";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
-import { AppSidebar } from "@/components/appSidebar";
 
 export const metadata: Metadata = {
   title: "Debate Io",
@@ -18,7 +16,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${montserrat400.className} min-h-screen antialiased flex items-center justify-center`}
+        className={`${montserrat400.className} min-h-screen relative antialiased`}
       >
         <ThemeProvider
           attribute="class"
@@ -27,15 +25,7 @@ export default function RootLayout({
           forcedTheme="dark"
           disableTransitionOnChange
         >
-          <SidebarProvider>
-            <AppSidebar />
-            <main className="p-4 w-screen min-h-screen">
-              <SidebarTrigger />
-              <section className="w-full h-full p-10 flex items-center justify-center">
-                {children}
-              </section>
-            </main>
-          </SidebarProvider>
+          {children}
         </ThemeProvider>
       </body>
     </html>
